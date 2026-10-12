@@ -67,6 +67,12 @@ fun MainScreen(demoViewModel: DemoViewModel) {
             Text(
                 text = "SharedFlow Demo",
                 style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = "Сохранено значений: ${demoViewModel.messages.size} из 50",
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 

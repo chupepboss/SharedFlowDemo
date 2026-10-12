@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ScreenSetup() {
     val demoViewModel: DemoViewModel = viewModel()
+
     MainScreen(demoViewModel)
 }
 
@@ -48,7 +49,9 @@ fun MainScreen(demoViewModel: DemoViewModel) {
     LaunchedEffect(demoViewModel, lifecycleOwner) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             demoViewModel.sharedFlow.collect { value ->
+
                 Log.d("SharedFlowDemo", "Collecting $value")
+
                 demoViewModel.messages.add(value)
             }
         }

@@ -14,14 +14,16 @@ class DemoViewModel : ViewModel() {
     private val _sharedFlow = MutableSharedFlow<Int>()
     val sharedFlow = _sharedFlow.asSharedFlow()
 
-    // Список хранится в ViewModel и переживает поворот экрана
+    // История полученных значений
     val messages = mutableStateListOf<Int>()
 
     init {
         viewModelScope.launch {
             for (i in 1..1000) {
                 delay(2000)
+
                 Log.d("SharedFlowDemo", "Emitting $i")
+
                 _sharedFlow.emit(i)
             }
         }

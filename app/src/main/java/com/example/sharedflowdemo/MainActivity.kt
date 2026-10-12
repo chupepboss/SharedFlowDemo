@@ -1,3 +1,4 @@
+
 package com.example.sharedflowdemo
 
 import android.os.Bundle
@@ -38,7 +39,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ScreenSetup() {
     val demoViewModel: DemoViewModel = viewModel()
-
     MainScreen(demoViewModel)
 }
 
@@ -49,10 +49,8 @@ fun MainScreen(demoViewModel: DemoViewModel) {
     LaunchedEffect(demoViewModel, lifecycleOwner) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             demoViewModel.sharedFlow.collect { value ->
-
                 Log.d("SharedFlowDemo", "Collecting $value")
-
-                demoViewModel.messages.add(value)
+                demoViewModel.addMessage(value)
             }
         }
     }
@@ -72,9 +70,7 @@ fun MainScreen(demoViewModel: DemoViewModel) {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(demoViewModel.messages) { message ->
                     Text(
                         text = "Получено значение: $message",
